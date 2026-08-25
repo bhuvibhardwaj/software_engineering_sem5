@@ -15,8 +15,6 @@ Contents:
 - UML Use-Case Diagram
 - Use-Case Description
 
-📄 [View Lab 1 Submission](lab-1/LAB-1_PES2UG24AM041.pdf)
+[View Lab 1 Submission](LAB-1_PES2UG24AM041.pdf)
 
-### UML Use-Case Diagram
-
-![OpenAPI Mock Server Generator Use Case Diagram](lab-1/usecase.png)
+![OpenAPI Mock Server Generator Use Case Diagram](usecase.png)
