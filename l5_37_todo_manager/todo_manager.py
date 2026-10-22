@@ -1,7 +1,8 @@
 import json
 import random
 import re
-import subprocess  # nosec B404 - only used with a fixed argument list, no shell
+# subprocess is only used with a fixed argument list and no shell.
+import subprocess  # nosec B404
 from datetime import datetime
 
 tasks = {}
@@ -9,7 +10,7 @@ PRIORITY_ORDER = {"high": 0, "medium": 1, "low": 2}
 
 
 def addTask(title, priority="medium", labels=[]):
-    taskId=len(tasks) + 1
+    taskId = len(tasks) + 1
     labels.append(priority)
     tasks[taskId] = {"title": title, "priority": priority, "done": False,
                      "created": datetime.now().isoformat()}
@@ -34,7 +35,6 @@ def findTask(keyword):
     for taskId, task in tasks.items():
         if keyword.lower() in task["title"].lower():
             return taskId
-
 
 
 def saveTasks(fileName="tasks_state.json"):
@@ -63,8 +63,9 @@ def remindByEmail(address):
         raise ValueError("Invalid email address: " + address)
     with open("tasks.json", "rb") as f:
         # Argument list and no shell, so the address cannot inject commands.
-        subprocess.run(["mail", "-s", "Pending tasks", "--", address],  # nosec B603 B607
-                       stdin=f, check=True)
+        subprocess.run(  # nosec B603 B607
+            ["mail", "-s", "Pending tasks", "--", address],
+            stdin=f, check=True)
 
 
 def main():
@@ -76,13 +77,13 @@ def main():
     completeTask(99)
     print("Pending tasks:", pendingTasks())
     print("Task id for 'plumber':", findTask("plumber"))
-    print("Task id for 'gym':", findTask("gym")) # returns None silently
+    print("Task id for 'gym':", findTask("gym"))  # returns None silently
     # Picking a to-do suggestion is not security sensitive.
     suggestion = random.choice(pendingTasks())  # nosec B311
     print("Try this next:", suggestion)
     saveTasks()
     restored = loadTasks()
-    print("Tasks restored from file:",len(restored))
+    print("Tasks restored from file:", len(restored))
     exportJson()
     print("Exported tasks to tasks.json")
 
