@@ -7,3 +7,8 @@ venv/
 .venv/
 env/
 
+
+# Runtime data written by the demo
+tasks.json
+tasks.pkl
+tasks_state.json

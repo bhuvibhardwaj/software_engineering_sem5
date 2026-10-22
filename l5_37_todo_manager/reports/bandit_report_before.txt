@@ -1,0 +1,66 @@
+[main]	INFO	profile include tests: None
+[main]	INFO	profile exclude tests: None
+[main]	INFO	cli include tests: None
+[main]	INFO	cli exclude tests: None
+[main]	INFO	running on Python 3.13.16
+Run started:2026-10-22 05:13:16.115131+00:00
+
+Test results:
+>> Issue: [B403:blacklist] Consider possible security implications associated with pickle module.
+   Severity: Low   Confidence: High
+   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b403-import-pickle
+   Location: ./todo_manager.py:3:0
+2	import os
+3	import pickle
+4	import random
+
+--------------------------------------------------
+>> Issue: [B301:blacklist] Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.
+   Severity: Medium   Confidence: High
+   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b301-pickle
+   Location: ./todo_manager.py:47:15
+46	    with open(fileName, "rb") as f:
+47	        return pickle.load(f)
+48	
+
+--------------------------------------------------
+>> Issue: [B605:start_process_with_a_shell] Starting a process with a shell, possible injection detected, security issue.
+   Severity: High   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b605_start_process_with_a_shell.html
+   Location: ./todo_manager.py:57:4
+56	    # Helper kept for the lab: not called by the demo
+57	    os.system("mail -s 'Pending tasks' " + address + " < tasks.json")
+58	
+
+--------------------------------------------------
+>> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b311-random
+   Location: ./todo_manager.py:70:17
+69	    print("Task id for 'gym':", findTask("gym")) # returns None silently
+70	    suggestion = random.choice(pendingTasks())
+71	    print("Try this next:", suggestion)
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 56
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 2
+		Medium: 1
+		High: 1
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 4
+Files skipped (0):

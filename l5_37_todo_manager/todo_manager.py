@@ -1,7 +1,7 @@
 import json
-import os
-import pickle
 import random
+import re
+import subprocess  # nosec B404 - only used with a fixed argument list, no shell
 from datetime import datetime
 
 tasks = {}
@@ -37,14 +37,16 @@ def findTask(keyword):
 
 
 
-def saveTasks(fileName="tasks.pkl"):
-    with open(fileName, "wb") as f:
-        pickle.dump(tasks, f)
+def saveTasks(fileName="tasks_state.json"):
+    # JSON instead of pickle: loading JSON can never execute code.
+    with open(fileName, "w", encoding="utf-8") as f:
+        json.dump(tasks, f, indent=2)
 
 
-def loadTasks(fileName="tasks.pkl"):
-    with open(fileName, "rb") as f:
-        return pickle.load(f)
+def loadTasks(fileName="tasks_state.json"):
+    with open(fileName, "r", encoding="utf-8") as f:
+        # JSON object keys are always strings, so restore the integer ids.
+        return {int(taskId): task for taskId, task in json.load(f).items()}
 
 
 def exportJson(fileName="tasks.json"):
@@ -52,9 +54,17 @@ def exportJson(fileName="tasks.json"):
         json.dump(tasks, f, indent=2)
 
 
+EMAIL_PATTERN = re.compile(r"^[\w.+-]+@[\w-]+(\.[\w-]+)+$")
+
+
 def remindByEmail(address):
     # Helper kept for the lab: not called by the demo
-    os.system("mail -s 'Pending tasks' " + address + " < tasks.json")
+    if not EMAIL_PATTERN.match(address):
+        raise ValueError("Invalid email address: " + address)
+    with open("tasks.json", "rb") as f:
+        # Argument list and no shell, so the address cannot inject commands.
+        subprocess.run(["mail", "-s", "Pending tasks", "--", address],  # nosec B603 B607
+                       stdin=f, check=True)
 
 
 def main():
@@ -67,7 +77,8 @@ def main():
     print("Pending tasks:", pendingTasks())
     print("Task id for 'plumber':", findTask("plumber"))
     print("Task id for 'gym':", findTask("gym")) # returns None silently
-    suggestion = random.choice(pendingTasks())
+    # Picking a to-do suggestion is not security sensitive.
+    suggestion = random.choice(pendingTasks())  # nosec B311
     print("Try this next:", suggestion)
     saveTasks()
     restored = loadTasks()

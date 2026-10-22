@@ -1,0 +1,4 @@
+todo_manager.py:12:11: E225 missing whitespace around operator
+todo_manager.py:40:1: E303 too many blank lines (3)
+todo_manager.py:69:49: E261 at least two spaces before inline comment
+todo_manager.py:74:38: E231 missing whitespace after ','

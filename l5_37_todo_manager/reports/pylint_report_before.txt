@@ -1,0 +1,32 @@
+************* Module todo_manager
+todo_manager.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+todo_manager.py:11:0: C0116: Missing function or method docstring (missing-function-docstring)
+todo_manager.py:11:0: C0103: Function name "addTask" doesn't conform to snake_case naming style (invalid-name)
+todo_manager.py:11:0: W0102: Dangerous default value [] as argument (dangerous-default-value)
+todo_manager.py:12:4: C0103: Variable name "taskId" doesn't conform to snake_case naming style (invalid-name)
+todo_manager.py:19:0: C0116: Missing function or method docstring (missing-function-docstring)
+todo_manager.py:19:0: C0103: Function name "completeTask" doesn't conform to snake_case naming style (invalid-name)
+todo_manager.py:19:17: C0103: Argument name "taskId" doesn't conform to snake_case naming style (invalid-name)
+todo_manager.py:27:0: C0116: Missing function or method docstring (missing-function-docstring)
+todo_manager.py:27:0: C0103: Function name "pendingTasks" doesn't conform to snake_case naming style (invalid-name)
+todo_manager.py:33:0: C0116: Missing function or method docstring (missing-function-docstring)
+todo_manager.py:33:0: C0103: Function name "findTask" doesn't conform to snake_case naming style (invalid-name)
+todo_manager.py:34:8: C0103: Variable name "taskId" doesn't conform to snake_case naming style (invalid-name)
+todo_manager.py:33:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
+todo_manager.py:40:0: C0116: Missing function or method docstring (missing-function-docstring)
+todo_manager.py:40:0: C0103: Function name "saveTasks" doesn't conform to snake_case naming style (invalid-name)
+todo_manager.py:40:14: C0103: Argument name "fileName" doesn't conform to snake_case naming style (invalid-name)
+todo_manager.py:45:0: C0116: Missing function or method docstring (missing-function-docstring)
+todo_manager.py:45:0: C0103: Function name "loadTasks" doesn't conform to snake_case naming style (invalid-name)
+todo_manager.py:45:14: C0103: Argument name "fileName" doesn't conform to snake_case naming style (invalid-name)
+todo_manager.py:50:0: C0116: Missing function or method docstring (missing-function-docstring)
+todo_manager.py:50:0: C0103: Function name "exportJson" doesn't conform to snake_case naming style (invalid-name)
+todo_manager.py:50:15: C0103: Argument name "fileName" doesn't conform to snake_case naming style (invalid-name)
+todo_manager.py:51:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+todo_manager.py:55:0: C0116: Missing function or method docstring (missing-function-docstring)
+todo_manager.py:55:0: C0103: Function name "remindByEmail" doesn't conform to snake_case naming style (invalid-name)
+todo_manager.py:60:0: C0116: Missing function or method docstring (missing-function-docstring)
+
+-----------------------------------
+Your code has been rated at 5.09/10
+
